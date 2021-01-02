@@ -17,7 +17,9 @@ export default server => {
         // wait for start message from client
         socket.on("play", socket => {
             // TODO: start pre-game logic
-            pregame(socket, ROOMID);
+            let cards = pregame(socket, ROOMID);
+
+            // TODO: pass cards to the game and start game
         });
 
         // TODO: on disconnect pause and keep room open for 1 minute

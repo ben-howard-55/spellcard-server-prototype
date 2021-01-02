@@ -1,8 +1,7 @@
 import cardRoundLogic from './card-logic/cardRoundLogic';
 
 /**
- * Pre-game logic that occurs before the spell-card game begins,
- * 
+ * Pre-game logic that occurs before the spell-card game begins
  */
 const TIMERLENGTH = 30000;
 
