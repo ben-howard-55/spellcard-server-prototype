@@ -1,7 +1,8 @@
-import * as express from 'express';
-import { createServer, Server } from 'http';
 const socketIo = require('socket.io');
 const cors = require('cors');
+import * as express from 'express';
+import { createServer, Server } from 'http';
+import {GameEvent} from './Constants';
 
 // GameServer Properties
 export class GameServer {
@@ -34,7 +35,12 @@ export class GameServer {
         });
 
         // socket events for the game
-        
+        this.io.on(GameEvent.CONNECT, (socket: SocketIO.Socket) => {
+            console.log('Socket connected:' + socket.id);
+
+            // TODO: Create GameRoom Instance and add to GameRoom Array
+
+        } )
 
     }
 
