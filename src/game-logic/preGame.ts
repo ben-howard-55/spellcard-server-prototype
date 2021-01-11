@@ -1,4 +1,5 @@
 import cardRoundLogic from './card-logic/cardRoundLogic';
+import {Card} from '../types'
 
 /**
  * Pre-game logic that occurs before the spell-card game begins
@@ -18,7 +19,7 @@ export default function pregame(socket, roomID) {
    // On either timer TimeOut or Continue button press, start game
    let preGamePromsie = new Promise((fulfill, reject) => {
       // start timer
-      timer = setTimeout(() => {
+      let timer = setTimeout(() => {
          // start the game
          socket.to(roomID).emit('stop pre-game');
 
@@ -39,20 +40,14 @@ export default function pregame(socket, roomID) {
          // send selected cards to the server-side game
          fulfill(cards);
       })
-   }).catch(console.log("In pre-game.js, ERROR"));
+   }).catch(() => console.log("In pre-game.js, ERROR"));
 
-
+   
    // if fulfilled then send the card information to the game
-   preGamePromsie.then((fulfilled = (res) => {
-      // check if 5 cards are selected, if not return 5 new cards
-      if (res.length !== 5) {
-         return cardRoundLogic();
-      }
-      
-      // return the selected cards
+   preGamePromsie.then(((res): Card[] => {      
       return res;
    }),
-   (rejected = (err) => {
+   ((err) => {
       // if the promise is for somereason reject, return 5 new cards
       // TODO: disconnect the socket and reset the game?
       console.log(err);
